@@ -3,7 +3,7 @@ import axios from 'axios';
 // ⚠️ สำหรับ Android Emulator ใช้ 'http://10.0.2.2:3000'
 // ⚠️ สำหรับเครื่องจริง (Physical Device) ให้ใช้ IP ของคอมพิวเตอร์ เช่น 'http://192.168.1.x:3000'
 // ⚠️ สำหรับ Web ใช้ 'http://localhost:3000'
-const BASE_URL = 'http://172.29.61.79:3000';
+const BASE_URL = 'http://172.29.61.79:5000';
 
 const axiosClient = axios.create({
     baseURL: BASE_URL,
