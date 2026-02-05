@@ -1,24 +1,50 @@
 version: '3.8'
 
 services:
+  # Run Service
+  backend:
+    build: ./Backend
+    container_name: bookbookshop-backend
+    volumes:
+      - ./Backend/uploads:/app/uploads
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://loeitech_admin:G7%23u4sK!8zWb@202.29.231.188:27018/booker_theend?authSource=admin
+      - JWT_SECRET=chokcoffee_secret_key_2024
+    depends_on:
+      - mongo
+    networks:
+      - app-network
 
-  mongo_db:
+  # Run Service
+  frontend:
+    build: ./frontend
+    container_name: booker-frontend-app
+    volumes:
+      - ./frontend-app:/app
+      - /app/node_modules
+    ports:
+      - "8081:8081"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  # Run Service
+  mongo:
     image: mongo:latest
-    container_name: exam_mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - app-network
 
-  backend_api:
-    build: ./backend
-    container_name: exam_backend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - mongo_db
-    environment:
-      - MONGO_URI=mongodb://mongo_db:27017/Book_db
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   mongo_data:

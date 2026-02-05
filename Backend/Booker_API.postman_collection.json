@@ -1,0 +1,248 @@
+{
+    "info": {
+        "name": "Booker API",
+        "description": "API สำหรับระบบยืม-คืนหนังสือ",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:5000",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register - สมัครสมาชิก",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"123456\",\n    \"role\": \"member\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/register",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "register"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Register Admin - สมัคร Admin",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"123456\",\n    \"role\": \"admin\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/register",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "register"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Login - เข้าสู่ระบบ",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/login",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "login"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Get All Users - ดูสมาชิกทั้งหมด",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/users",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Books",
+            "item": [
+                {
+                    "name": "Get All Books - ดูหนังสือทั้งหมด",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/books",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "books"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Book - เพิ่มหนังสือ",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"หนังสือทดสอบ\",\n    \"author\": \"ผู้แต่ง\",\n    \"quantity\": 5\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/books",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "books"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Transactions",
+            "item": [
+                {
+                    "name": "Borrow Book - ยืมหนังสือ",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"user_id\": \"USER_ID_HERE\",\n    \"book_id\": \"BOOK_ID_HERE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/borrow",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "borrow"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Return Book - คืนหนังสือ",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"transaction_id\": \"TRANSACTION_ID_HERE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/return",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "return"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get History - ดูประวัติยืม-คืน",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/history/USER_ID_HERE",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "history",
+                                "USER_ID_HERE"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Admin - Get Borrowed Books",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/admin/borrowed-books",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "borrowed-books"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

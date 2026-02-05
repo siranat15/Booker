@@ -208,7 +208,7 @@ app.get('/admin/borrowed-books', async (req, res) => {
 });
 
 // เริ่ม Server
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`🚀 Server running on port ${PORT}`);
