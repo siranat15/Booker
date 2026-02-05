@@ -12,8 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// เชื่อมต่อ Database ชื่อ Competency-test-db
-const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/Competency-test-db';
+// เชื่อมต่อ Database ชื่อ booker_theend
+const mongoUri = process.env.MONGO_URI || 'mongodb://loeitech_admin:G7%23u4sK!8zWb@202.29.231.188:27018/booker_theend?authSource=admin';
 
 mongoose.connect(mongoUri)
     .then(() => console.log('✅ Connected to MongoDB successfully'))
