@@ -19,6 +19,7 @@ import ReturnScreen from './screens/ReturnScreen';
 import AdminUsersScreen from './screens/AdminUsersScreen';
 import AdminAddBookScreen from './screens/AdminAddBookScreen';
 import AdminBorrowedScreen from './screens/AdminBorrowedScreen';
+import AdminBooksScreen from './screens/AdminBooksScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,7 +62,9 @@ function AdminTabs() {
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
 
-                    if (route.name === 'Users') {
+                    if (route.name === 'Books') {
+                        iconName = focused ? 'library' : 'library-outline';
+                    } else if (route.name === 'Users') {
                         iconName = focused ? 'people' : 'people-outline';
                     } else if (route.name === 'Borrowed') {
                         iconName = focused ? 'book' : 'book-outline';
@@ -78,6 +81,7 @@ function AdminTabs() {
                 headerShown: false,
             })}
         >
+            <Tab.Screen name="Books" component={AdminBooksScreen} options={{ title: 'Books' }} />
             <Tab.Screen name="Borrowed" component={AdminBorrowedScreen} options={{ title: 'Borrowed' }} />
             <Tab.Screen name="Users" component={AdminUsersScreen} options={{ title: 'Members' }} />
             <Tab.Screen name="AddBook" component={AdminAddBookScreen} options={{ title: 'Add Book' }} />

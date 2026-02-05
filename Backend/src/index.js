@@ -105,6 +105,39 @@ app.post('/books', async (req, res) => {
     }
 });
 
+// 2.2.15 แก้ไขรายการหนังสือ (สำหรับ Admin)
+app.put('/books/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, author, quantity } = req.body;
+        const book = await Book.findByIdAndUpdate(
+            id,
+            { title, author, quantity },
+            { new: true, runValidators: true }
+        );
+        if (!book) {
+            return res.status(404).json({ error: 'Book not found' });
+        }
+        res.json(book);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+// 2.2.16 ลบรายการหนังสือ (สำหรับ Admin)
+app.delete('/books/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const book = await Book.findByIdAndDelete(id);
+        if (!book) {
+            return res.status(404).json({ error: 'Book not found' });
+        }
+        res.json({ message: 'Book deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // ==========================================
 // ส่วนที่ 3: ระบบยืม-คืน (Transaction)
 // ==========================================
